@@ -8,7 +8,11 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true
   })
   User.associate = function (models) {
-    // associations can be defined here
+    User.belongsToMany(models.Attraction, {
+      through: models.Favorite,
+      foreignKey: 'userId',
+      as: 'FavoriteAttractions'
+    })
   }
   return User
 }
