@@ -4,6 +4,7 @@ const passport = require('passport')
 
 const userController = require('../controllers/user-controller')
 const { generalErrorHandler } = require('../middleware/error-handler')
+const { authenticated } = require('../middleware/auth')
 
 router.get('/signup', userController.signUpPage)
 router.post('/signup', userController.signUp)
