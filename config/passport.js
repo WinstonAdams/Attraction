@@ -41,7 +41,7 @@ passport.use(new FacebookStrategy(
 
       const user = await User.findOne({ where: { email } })
       // 直接登入
-      if (user) done(null, user)
+      if (user) return done(null, user)
 
       // 寫入資料後登入
       const randomPassword = Math.random().toString(36).slice(-8)
