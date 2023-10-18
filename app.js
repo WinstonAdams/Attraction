@@ -12,7 +12,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 
 const app = express()
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 
 app.engine('hbs', exphbs({
   defaultLayout: 'main',
@@ -20,7 +20,7 @@ app.engine('hbs', exphbs({
 }))
 app.set('view engine', 'hbs')
 
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true })) // 承接並解析 urlencoded 格式的請求
 app.use(methodOverride('_method'))
 
 app.listen(PORT, () => {
