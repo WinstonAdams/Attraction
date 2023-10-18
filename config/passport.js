@@ -26,6 +26,37 @@ passport.use(new LocalStrategy(
   }
 ))
 
+// Facebook 登入驗證
+passport.use(new FacebookStrategy(
+  {
+    clientID: process.env.FACEBOOK_ID,
+    clientSecret: process.env.FACEBOOK_SECRET,
+    callbackURL: process.env.FACEBOOK_CALLBACK,
+    profileFields: ['email', 'displayName'] // 向 Facebook 要求開放的資料 (email 和 Facebook 上的公開名稱)
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    try {
+      // profile 裡面有一個 _json 物件，包含 name 和 email
+      const { name, email } = profile._json
+
+      const user = await User.findOne({ where: { email } })
+      // 直接登入
+      if (user) done(null, user)
+
+      // 寫入資料後登入
+      const randomPassword = Math.random().toString(36).slice(-8)
+      const newUser = User.create({
+        name,
+        email,
+        password: await bcrypt.hash(randomPassword, 10)
+      })
+      return done(null, newUser)
+    } catch (err) {
+      done(err)
+    }
+  }
+))
+
 passport.serializeUser((user, done) => {
   done(null, user.id)
 })
