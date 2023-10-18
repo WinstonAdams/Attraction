@@ -12,6 +12,10 @@ const userController = {
       req.flash('success_messages', '成功註冊帳號！')
       return res.redirect('/signin')
     })
+  },
+
+  signInPage: (req, res) => {
+    res.render('signin')
   }
 }
 
