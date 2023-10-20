@@ -16,7 +16,7 @@ header {
 
 header section {
   display: flex;
-  flex: 2 1 500px;
+  flex: 2 1 700px;
   align-items: center;
   padding-left: 1rem;
 }
@@ -58,4 +58,9 @@ header nav ul li a:hover {
   color: rgb(32, 195, 198);
   border-bottom: 3px solid rgb(32, 195, 198);
   font-weight: bold;
+}
+
+.signin, .signup {
+  background-color: rgba(32, 195, 198, 0.1);
+  box-shadow: 5px 8px 12px 0 rgba(0, 0, 0, 0.125);
 }

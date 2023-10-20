@@ -5,12 +5,15 @@
   </section>
   <nav>
     <ul>
+      {{#if user}}
       <li><a href="#"><i class="fa-solid fa-comments" style="color: rgb(32, 195, 198)"></i> 問 AI</a></li>
       <li><a href="#"><i class="fa-solid fa-book-bookmark" style="color: rgb(32, 195, 198)"></i> 想去的景點</a></li>
-      <li><a href="#"><i class="fa-solid fa-user-gear" style="color: rgb(32, 195, 198)"></i> (name)</a></li>
-      <li><a href="#"><i class="fa-solid fa-right-to-bracket" style="color: rgb(32, 195, 198)"></i>/<i
-            class="fa-solid fa-right-from-bracket" style="color: rgb(32, 195, 198)"></i>
-          登入/(登出)</a></li>
+      <li><a href="#"><i class="fa-solid fa-user-gear" style="color: rgb(32, 195, 198)"></i> {{user.name}}</a></li>
+      <li><a href="#"><i class="fa-solid fa-right-from-bracket" style="color: rgb(32, 195, 198)"></i> 登出</a></li>
+      {{else}}
+      <li><a href="#"><i class="fa-solid fa-comments" style="color: rgb(32, 195, 198)"></i> 問 AI</a></li>
+      <li><a href="#"><i class="fa-solid fa-right-to-bracket" style="color: rgb(32, 195, 198)"></i> 登入</a></li>
+      {{/if}}
     </ul>
   </nav>
 </header>
