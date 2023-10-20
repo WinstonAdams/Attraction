@@ -22,6 +22,7 @@ app.engine('hbs', exphbs({
 }))
 app.set('view engine', 'hbs')
 
+app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true })) // 承接並解析 urlencoded 格式的請求
 app.use(methodOverride('_method'))
 app.use(session({ secret: SESSION_SECRET, resave: false, saveUninitialized: false }))
