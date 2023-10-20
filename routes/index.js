@@ -3,6 +3,7 @@ const router = express.Router()
 const passport = require('passport')
 
 const userController = require('../controllers/user-controller')
+const attractionController = require('../controllers/attraction-controller')
 const { generalErrorHandler } = require('../middleware/error-handler')
 const { authenticated } = require('../middleware/auth')
 
@@ -19,6 +20,8 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', {
   successRedirect: '/',
   failureRedirect: '/signin'
 }))
+
+router.get('/attractions', authenticated, attractionController.getAttractions)
 
 router.use('/', (req, res) => res.redirect('/attractions'))
 

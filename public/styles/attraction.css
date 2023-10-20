@@ -60,7 +60,45 @@ header nav ul li a:hover {
   font-weight: bold;
 }
 
-.signin, .signup {
+.signin,
+.signup {
   background-color: rgba(32, 195, 198, 0.1);
   box-shadow: 5px 8px 12px 0 rgba(0, 0, 0, 0.125);
+}
+
+.main {
+  position: relative;
+}
+
+section.background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  background-image: url("/images/台北101.jpg");
+  background-size: cover;
+  background-position: 50% 70%;
+  transition: all 0.75s ease;
+}
+
+section.background-img h3 {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 300;
+  text-align: center;
+}
+
+section.background-img .filter {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  min-height: 70vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }

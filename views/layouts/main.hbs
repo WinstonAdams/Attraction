@@ -13,13 +13,9 @@
 
 <body class="d-flex flex-column h-100 bg-light">
   {{> header}}
-  <main class="flex-shrink-0" role="main">
-    <div class="album container pt-2">
-      <div class="pt-3 mb-5">
-        {{> messages}}
-        {{{body}}}
-      </div>
-    </div>
+  <main class="main flex-shrink-0" role="main">
+    {{> messages}}
+    {{{body}}}
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"

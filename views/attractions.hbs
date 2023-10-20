@@ -1,0 +1,17 @@
+<section class="background-img">
+  <div class="filter"></div>
+  <h3>休閒空間，<br>特殊假期 </h3>
+</section>
+
+<script>
+  setInterval(() => {
+    let topBackground = document.querySelector("section.background-img")
+    if (topBackground.style.backgroundImage === 'url("/images/台北101.jpg")') {
+      topBackground.style.backgroundImage = 'url("/images/阿里山.jpg")'
+    } else if (topBackground.style.backgroundImage === 'url("/images/阿里山.jpg")') {
+      topBackground.style.backgroundImage = 'url("/images/清水斷崖.jpg")'
+    } else {
+      topBackground.style.backgroundImage = 'url("/images/台北101.jpg")'
+    }
+  }, 3000)
+</script>
