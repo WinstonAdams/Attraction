@@ -21,6 +21,8 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', {
   failureRedirect: '/signin'
 }))
 
+router.get('/logout', userController.logout)
+
 router.get('/attractions', authenticated, attractionController.getAttractions)
 
 router.use('/', (req, res) => res.redirect('/attractions'))
