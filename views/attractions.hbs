@@ -1,6 +1,75 @@
 <section class="background-img">
   <div class="filter"></div>
-  <h3>休閒空間，<br>特殊假期 </h3>
+  <h3>發掘美景，尋找秘境<br>瀏覽台灣各地景點加入自己的清單</h3>
+  <div class="input-group select">
+    <select class="form-select" id="sort" name="sort">
+      <option>請選擇城市</option>
+      <option value="#">#</option>
+      <option value="#">#</option>
+      <option value="#">#</option>
+      <option value="#">#</option>
+    </select>
+  </div>
+</section>
+
+<section>
+  <div class="attractions-header">
+    <h3>景點</h3>
+    <div class="input-group mb-2 mb-sm-0 mr-sm-2 search">
+      <input type="text" name="keyword" class="form-control" placeholder="請輸入景點" aria-label="Attraction Name"
+        value="{{ keyword }}" aria-describedby="search-button">
+      <button class="btn btn-major" type="submit" id="search-button" style="background-color: rgb(32, 195, 198)"><i
+          class="fas fa-search" style="color: white"></i></button>
+    </div>
+  </div>
+
+  <div class="container mt-5 mb-3">
+    <div class="row">
+      <div class="col-md-10 col-12 mx-auto">
+        <div class="row row-cols-sm-3">
+
+          {{#each attractionsList}}
+          <div class="col">
+            <div class="card mb-2">
+              <a href="#">
+                <img class="card-img-top" src="{{ this.image }}" alt="{{ this.name }}">
+              </a>
+
+              <div class="card-body p-3">
+                <a href="#">
+                  <h6 class="card-title mb-1">{{ this.name }}</h6>
+
+                  <div class="restaurant-category mb-1">
+                    <i class="fas fa-utensils pr-2"></i> {{ this.address }}
+                  </div>
+                </a>
+
+                <span class="badge rounded-pill bg-info">
+                  {{ this.city }}
+                  <i class="fas fa-star fa-xs"></i>
+                </span>
+              </div>
+
+              <div class="card-footer d-flex justify-content-end flex-wrap">
+                {{#if this.isFavorited}}
+                <form action="/favorites/{{this.id}}?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-danger m-1">移除最愛</button>
+                </form>
+                {{else}}
+                <form action="/favorites/{{this.id}}" method="POST">
+                  <button type="submit" class="btn btn-primary m-1">加到最愛</button>
+                </form>
+                {{/if}}
+              </div>
+
+            </div>
+          </div>
+          {{/each}}
+
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <script>
