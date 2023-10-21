@@ -1,6 +1,8 @@
+const attractionServices = require('../services/attraction-services')
+
 const attractionController = {
-  getAttractions: (req, res) => {
-    res.render('attractions')
+  getAttractions: (req, res, next) => {
+    attractionServices.getAttractions(req, (err, data) => err ? next(err) : res.render('attractions', data))
   }
 }
 

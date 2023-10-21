@@ -11,6 +11,7 @@ if (process.env.NODE_ENV !== 'production') {
 //* 載入自己設定的檔案
 const routes = require('./routes')
 const passport = require('./config/passport')
+const handlebarsHelpers = require('./helpers/handlebars-helpers')
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -18,7 +19,8 @@ const SESSION_SECRET = process.env.SESSION_SECRET
 
 app.engine('hbs', exphbs({
   defaultLayout: 'main',
-  extname: 'hbs'
+  extname: 'hbs',
+  helpers: handlebarsHelpers
 }))
 app.set('view engine', 'hbs')
 

@@ -97,9 +97,13 @@ section.background-img .filter {
   z-index: -1;
 }
 
-section .select {
+section form.select {
   width: 50%;
   padding: 0 15%;
+}
+
+section form.select .select {
+  width: 100%;
 }
 
 .attractions-header {
@@ -115,6 +119,29 @@ section .select {
   margin-bottom: 20px;
 }
 
-.attractions-header .search {
+.attractions-header form.search {
   width: 30%;
 }
+
+.attractions-header form.search .search {
+  width: 100%;
+}
+
+.card {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card .card-body a {
+  text-decoration: none;
+  color: black;
+}
+
+.card .card-body .address {
+  font-size: 12px;
+}
+
+.card .card-body .card-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
