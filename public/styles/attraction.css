@@ -145,3 +145,6 @@ section form.select .select {
   font-weight: bold;
 }
 
+ul.pagination div.pagination {
+  margin: auto;
+}

@@ -4,7 +4,7 @@
   <form action="/attractions" class="select">
     <div class="input-group">
       <select class="form-select" id="city" name="city">
-        <option>請選擇城市</option>
+        <option value="">請選擇城市</option>
         <option value="臺北" {{#ifCond city "臺北" }}selected{{/ifCond}}>臺北</option>
         <option value="新北" {{#ifCond city "新北" }}selected{{/ifCond}}>新北</option>
         <option value="基隆" {{#ifCond city "基隆" }}selected{{/ifCond}}>基隆</option>
@@ -90,6 +90,40 @@
     </div>
   </div>
 </section>
+
+<nav class="mt-3" aria-label="page navigation">
+  <ul class="pagination">
+    <div class="pagination">
+      <li class="page-item {{#ifCond pagination.currentPage 1}}disabled{{/ifCond}}">
+        <a class="page-link" href="/attractions?page={{pagination.prev}}&city={{city}}&keyword={{keyword}}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      {{#if haveEllipsisFront}}
+        <li class="page-item"><a class="page-link">...</a></li>
+      {{/if}}
+
+      {{#each pagination.nearPages}}
+        {{#ifCond this ../pagination.currentPage}}
+          <li class="page-item active"><a class="page-link" href="#">{{../this}}</a></li>
+        {{else}}
+          <li class="page-item">
+            <a class="page-link" href="/attractions?page={{../this}}&city={{../../city}}&keyword={{../../keyword}}">{{../this}}</a>
+          </li>
+        {{/ifCond}}
+      {{/each}}
+
+      {{#if haveEllipsisBack}}
+        <li class="page-item"><a class="page-link">...</a></li>
+      {{/if}}
+      <li class="page-item {{#ifCond pagination.currentPage pagination.totalPage}}disabled{{/ifCond}}">
+        <a class="page-link" href="/attractions?page={{pagination.next}}&city={{city}}&keyword={{keyword}}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </div>
+  </ul>
+</nav>
 
 <script>
   // 輪播首頁圖片

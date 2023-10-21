@@ -43,5 +43,5 @@ app.use((req, res, next) => {
 app.use(routes)
 
 app.listen(PORT, () => {
-  console.log(`🚀 App is listening on http://localhost:${PORT}`)
+  console.log(`📢 App is listening on http://localhost:${PORT}`)
 })

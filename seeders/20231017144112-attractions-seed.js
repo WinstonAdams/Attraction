@@ -12,7 +12,7 @@ module.exports = {
             name: attraction.ScenicSpotName,
             address: attraction.Address,
             city: attraction.Address.slice(0, 2),
-            image: '',
+            image: 'https://i.imgur.com/MsZJMOd.jpeg',
             created_at: new Date(),
             updated_at: new Date()
           }
@@ -34,7 +34,7 @@ module.exports = {
             name: attraction.ScenicSpotName,
             address: attraction.Address,
             city: attraction.City.slice(0, 2),
-            image: '',
+            image: 'https://i.imgur.com/MsZJMOd.jpeg',
             created_at: new Date(),
             updated_at: new Date()
           }
