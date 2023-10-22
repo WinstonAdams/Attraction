@@ -29,6 +29,8 @@ router.post('/favorites/:attractionId', authenticated, userController.addFavorit
 router.delete('/favorites/:attractionId', authenticated, userController.removeFavorite)
 router.get('/favorites/:userId', authenticated, userController.getFavorites)
 
+router.get('/users/:id', authenticated, userController.getUser)
+
 router.use('/', (req, res) => res.redirect('/attractions'))
 
 router.use('/', generalErrorHandler)

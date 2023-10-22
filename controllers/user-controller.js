@@ -37,11 +37,11 @@ const userController = {
   },
 
   getFavorites: (req, res, next) => {
-    try {
-      return res.render('favorites')
-    } catch (err) {
-      return next(err)
-    }
+    res.render('favorites')
+  },
+
+  getUser: (req, res, next) => {
+    userServices.getUser(req, (err, data) => err ? next(err) : res.render('users/profile', data))
   }
 }
 

@@ -59,6 +59,17 @@ const userServices = {
     } catch (err) {
       return callback(err)
     }
+  },
+
+  getUser: async (req, callback) => {
+    try {
+      const searchedUser = await User.findByPk(req.params.id, { raw: true })
+      if (!searchedUser) throw new Error('使用者不存在!')
+
+      return callback(null, { searchedUser })
+    } catch (err) {
+      return callback(err)
+    }
   }
 }
 

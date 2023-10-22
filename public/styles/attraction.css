@@ -109,7 +109,7 @@ section form.select .select {
   width: 100%;
 }
 
-.attractions-header, .favorites-header {
+.attractions-header, .favorites-header, .profile-title {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -118,7 +118,8 @@ section form.select .select {
 }
 
 .attractions-header h3,
-.favorites-header h3 {
+.favorites-header h3,
+.profile-title h3 {
   font-weight: bold;
   margin-bottom: 20px;
 }
@@ -161,6 +162,7 @@ footer {
   background-image: url("/images/台北101.jpg");
   background-size: cover;
   background-position: 50% 65%;
+  box-shadow: inset 0 4px 12px 0 rgba(0, 0, 0, 0.3);
 }
 
 footer section.logo {
