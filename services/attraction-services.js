@@ -22,7 +22,14 @@ const attractionServices = {
         nest: true,
         raw: true
       })
-      const result = attractions.rows
+
+      const favoritedAttractionId = req.user?.FavoriteAttractions ? req.user.FavoriteAttractions.map(fa => fa.id) : []
+      const result = attractions.rows.map(a => {
+        return {
+          ...a,
+          isFavorited: favoritedAttractionId.some(faId => faId === a.id)
+        }
+      })
 
       return callback(null, {
         attractions: result,

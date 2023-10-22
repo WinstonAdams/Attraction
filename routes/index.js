@@ -25,6 +25,8 @@ router.get('/logout', userController.logout)
 
 router.get('/attractions', authenticated, attractionController.getAttractions)
 
+router.post('/favorites/:attractionId', authenticated, userController.addFavorite)
+
 router.use('/', (req, res) => res.redirect('/attractions'))
 
 router.use('/', generalErrorHandler)

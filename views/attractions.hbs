@@ -1,6 +1,6 @@
 <section class="background-img">
   <div class="filter"></div>
-  <h3>發掘美景，尋找秘境<br>瀏覽台灣各地景點加入自己的清單</h3>
+  <h3>發掘美景，尋找秘境<br>瀏覽台灣各地景點加入願望清單</h3>
   <form action="/attractions" class="select">
     <div class="input-group">
       <select class="form-select" id="city" name="city">
@@ -72,11 +72,11 @@
               <div class="card-footer d-flex justify-content-end flex-wrap">
                 {{#if this.isFavorited}}
                 <form action="/favorites/{{this.id}}?_method=DELETE" method="POST">
-                  <button type="submit" class="btn btn-danger m-1">移除最愛</button>
+                  <button type="submit" class="btn btn-danger m-1">從清單移除</button>
                 </form>
                 {{else}}
                 <form action="/favorites/{{this.id}}" method="POST">
-                  <button type="submit" class="btn btn-primary m-1">加到最愛</button>
+                  <button type="submit" class="btn btn-primary m-1">加入清單</button>
                 </form>
                 {{/if}}
               </div>

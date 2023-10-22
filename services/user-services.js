@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs')
 const validator = require('validator')
 
-const { User } = require('../models')
+const { User, Attraction, Favorite } = require('../models')
 
 const userServices = {
   signUp: async (req, callback) => {
@@ -20,6 +20,24 @@ const userServices = {
         password: await bcrypt.hash(password, 10)
       })
       return callback(null, newUser)
+    } catch (err) {
+      return callback(err)
+    }
+  },
+
+  addFavorite: async (req, callback) => {
+    try {
+      const { attractionId } = req.params
+
+      const [attraction, favorite] = await Promise.all([
+        Attraction.findByPk(attractionId),
+        Favorite.findOne({ where: { userId: req.user.id, attractionId } })
+      ])
+      if (!attraction) throw new Error('此景點不存在!')
+      if (favorite) throw new Error('此景點已加入願望清單!')
+
+      const newFavorite = await Favorite.create({ userId: req.user.id, attractionId })
+      return callback(null, newFavorite)
     } catch (err) {
       return callback(err)
     }
