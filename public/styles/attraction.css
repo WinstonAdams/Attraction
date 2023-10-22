@@ -64,7 +64,6 @@ header nav ul li a:hover {
 
 .signin,
 .signup {
-  background-color: rgba(32, 195, 198, 0.1);
   box-shadow: 5px 8px 12px 0 rgba(0, 0, 0, 0.125);
 }
 
@@ -109,7 +108,9 @@ section form.select .select {
   width: 100%;
 }
 
-.attractions-header, .favorites-header, .profile-title {
+.attractions-header,
+.favorites-header,
+.profile-title {
   display: flex;
   flex-direction: column;
   justify-content: center;

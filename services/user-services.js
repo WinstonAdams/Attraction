@@ -19,6 +19,7 @@ const userServices = {
         email,
         password: await bcrypt.hash(password, 10)
       })
+      delete newUser.password
       return callback(null, newUser)
     } catch (err) {
       return callback(err)
@@ -78,6 +79,28 @@ const userServices = {
       if (!searchedUser) throw new Error('使用者不存在!')
 
       return callback(null, { searchedUser })
+    } catch (err) {
+      return callback(err)
+    }
+  },
+
+  putUser: async (req, callback) => {
+    try {
+      if (req.user.id !== Number(req.params.id)) throw new Error('只能編輯自己的個人資料！')
+      const { name, email, password, passwordCheck } = req.body
+      if (!name || !email || !password || !passwordCheck) throw new Error('所有欄位皆為必填！')
+      if (!validator.isEmail(email)) throw new Error('請輸入正確 email!')
+      if (password !== passwordCheck) throw new Error('密碼與確認密碼不符合！')
+
+      const user = await User.findByPk(req.params.id)
+      if (!user) throw new Error('使用者不存在!')
+      const updateUser = await user.update({
+        name,
+        email,
+        password: await bcrypt.hash(password, 10)
+      })
+      delete updateUser.password
+      return callback(null, updateUser)
     } catch (err) {
       return callback(err)
     }

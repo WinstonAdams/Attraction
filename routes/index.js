@@ -31,6 +31,7 @@ router.get('/favorites/:userId', authenticated, userController.getFavorites)
 
 router.get('/users/:id', authenticated, userController.getUser)
 router.get('/users/:id/edit', authenticated, userController.editUser)
+router.put('/users/:id', authenticated, userController.putUser)
 
 router.use('/', (req, res) => res.redirect('/attractions'))
 
