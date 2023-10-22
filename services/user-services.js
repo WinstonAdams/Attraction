@@ -41,6 +41,24 @@ const userServices = {
     } catch (err) {
       return callback(err)
     }
+  },
+
+  removeFavorite: async (req, callback) => {
+    try {
+      const { attractionId } = req.params
+
+      const [attraction, favorite] = await Promise.all([
+        Attraction.findByPk(attractionId),
+        Favorite.findOne({ where: { userId: req.user.id, attractionId } })
+      ])
+      if (!attraction) throw new Error('此景點不存在!')
+      if (!favorite) throw new Error('此景點不曾加入願望清單!')
+
+      const removedFavorite = await favorite.destroy()
+      return callback(null, removedFavorite)
+    } catch (err) {
+      return callback(err)
+    }
   }
 }
 

@@ -29,7 +29,11 @@ const userController = {
   },
 
   addFavorite: (req, res, next) => {
-    userServices.addFavorite(req, (err, data) => err ? next(err) : res.redirect('/attractions'))
+    userServices.addFavorite(req, (err, data) => err ? next(err) : res.redirect('back'))
+  },
+
+  removeFavorite: (req, res, next) => {
+    userServices.removeFavorite(req, (err, data) => err ? next(err) : res.redirect('back'))
   }
 }
 
