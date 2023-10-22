@@ -1,0 +1,46 @@
+<section>
+  <div class="favorites-header">
+    <h3>願望清單</h3>
+  </div>
+
+  <div class="container mt-3 mb-3">
+    <div class="row">
+      <div class="col-md-10 col-12 mx-auto">
+        <div class="row row-cols-sm-3">
+
+          {{#each attractions}}
+          <div class="col">
+            <div class="card mb-2">
+              <a href="https://media.taiwan.net.tw/zh-tw/portal/poi/details/{{this.number}}" target="_blank">
+                <img class="card-img-top img" src="{{ this.image }}" alt="{{ this.name }}">
+              </a>
+
+              <div class="card-body p-3">
+                <a href="https://media.taiwan.net.tw/zh-tw/portal/poi/details/{{this.number}}" target="_blank">
+                  <h6 class="card-title mb-1">{{ this.name }}</h6>
+
+                  <div class="address mb-1">
+                    <i class="fa-solid fa-location-dot" style="color: rgb(32, 195, 198)"></i> {{ this.address }}
+                  </div>
+                </a>
+
+                <span class="badge rounded-pill bg-info">
+                  {{ this.city }}
+                </span>
+              </div>
+
+              <div class="card-footer d-flex justify-content-end flex-wrap">
+                <form action="/favorites/{{this.id}}?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-danger btn-sm m-1" style="color: white;">從清單移除</button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+          {{/each}}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

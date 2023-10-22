@@ -34,6 +34,15 @@ const userController = {
 
   removeFavorite: (req, res, next) => {
     userServices.removeFavorite(req, (err, data) => err ? next(err) : res.redirect('back'))
+  },
+
+  getFavorites: (req, res, next) => {
+    try {
+      const favoritedAttraction = req.user.FavoriteAttractions
+      return res.render('favorites', { attractions: favoritedAttraction })
+    } catch (err) {
+      return next(err)
+    }
   }
 }
 
