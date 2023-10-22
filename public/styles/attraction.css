@@ -1,0 +1,187 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 2px 0;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header section {
+  display: flex;
+  flex: 2 1 700px;
+  align-items: center;
+  padding-left: 4rem;
+}
+
+header .logo {
+  width: 3vw;
+  height: 3vw;
+}
+
+header h1 a {
+  color: black;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-left: 1rem;
+}
+
+header nav {
+  flex: 5 1 500px;
+}
+
+header nav ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  list-style-type: none;
+  justify-content: space-around;
+}
+
+header nav ul li a {
+  color: black;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.15s ease;
+  padding-bottom: 0.3rem;
+}
+
+header nav ul li a:hover {
+  color: rgb(32, 195, 198);
+  border-bottom: 3px solid rgb(32, 195, 198);
+  font-weight: bold;
+}
+
+.signin,
+.signup {
+  background-color: rgba(32, 195, 198, 0.1);
+  box-shadow: 5px 8px 12px 0 rgba(0, 0, 0, 0.125);
+}
+
+section.background-img {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  background-image: url("/images/台北101.jpg");
+  background-size: cover;
+  background-position: 50% 70%;
+  transition: all 0.75s ease-in-out;
+}
+
+section.background-img h3 {
+  color: white;
+  font-size: 2rem;
+  font-weight: 300;
+  text-align: center;
+  padding-left: 10%;
+  line-height: normal;
+}
+
+section.background-img .filter {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  min-height: 70vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+section form.select {
+  width: 50%;
+  padding: 0 15%;
+}
+
+section form.select .select {
+  width: 100%;
+}
+
+.attractions-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.attractions-header h3 {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.attractions-header form.search {
+  width: 30%;
+}
+
+.attractions-header form.search .search {
+  width: 100%;
+}
+
+.card {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card .card-body a {
+  text-decoration: none;
+  color: black;
+}
+
+.card .card-body .address {
+  font-size: 12px;
+}
+
+.card .card-body .card-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+ul.pagination div.pagination {
+  margin: auto;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  background-image: url("/images/台北101.jpg");
+  background-size: cover;
+  background-position: 50% 65%;
+}
+
+footer section.logo {
+  display: flex;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer section.logo img {
+  width: 4vw;
+}
+
+footer section.logo h3 {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+footer section.links a img {
+  width: 2vw;
+  margin: 0rem 1.5rem;
+  margin-bottom: 1rem;
+}
