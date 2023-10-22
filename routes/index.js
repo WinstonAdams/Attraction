@@ -30,6 +30,7 @@ router.delete('/favorites/:attractionId', authenticated, userController.removeFa
 router.get('/favorites/:userId', authenticated, userController.getFavorites)
 
 router.get('/users/:id', authenticated, userController.getUser)
+router.get('/users/:id/edit', authenticated, userController.editUser)
 
 router.use('/', (req, res) => res.redirect('/attractions'))
 
