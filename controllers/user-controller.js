@@ -38,8 +38,7 @@ const userController = {
 
   getFavorites: (req, res, next) => {
     try {
-      const favoritedAttraction = req.user.FavoriteAttractions
-      return res.render('favorites', { attractions: favoritedAttraction })
+      return res.render('favorites')
     } catch (err) {
       return next(err)
     }
