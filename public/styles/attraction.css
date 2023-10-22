@@ -148,3 +148,36 @@ section form.select .select {
 ul.pagination div.pagination {
   margin: auto;
 }
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  background-image: url("/images/台北101.jpg");
+  background-size: cover;
+  background-position: 50% 65%;
+}
+
+footer section.logo {
+  display: flex;
+  padding: 0.5rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer section.logo img {
+  width: 4vw;
+}
+
+footer section.logo h3 {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+footer section.links a img {
+  width: 2vw;
+  margin: 0rem 1.5rem;
+  margin-bottom: 1rem;
+}
