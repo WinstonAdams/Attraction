@@ -26,6 +26,34 @@ const userController = {
     req.flash('success_messages', '登出成功！')
     req.logout()
     res.redirect('/signin')
+  },
+
+  addFavorite: (req, res, next) => {
+    userServices.addFavorite(req, (err, data) => err ? next(err) : res.redirect('back'))
+  },
+
+  removeFavorite: (req, res, next) => {
+    userServices.removeFavorite(req, (err, data) => err ? next(err) : res.redirect('back'))
+  },
+
+  getFavorites: (req, res, next) => {
+    res.render('favorites')
+  },
+
+  getUser: (req, res, next) => {
+    userServices.getUser(req, (err, data) => err ? next(err) : res.render('users/profile', data))
+  },
+
+  editUser: (req, res, next) => {
+    userServices.editUser(req, (err, data) => err ? next(err) : res.render('users/edit', data))
+  },
+
+  putUser: (req, res, next) => {
+    userServices.putUser(req, (err, data) => {
+      if (err) next(err)
+      req.flash('success_messages', '個人資料編輯成功!')
+      res.redirect(`/users/${data.id}`)
+    })
   }
 }
 

@@ -25,6 +25,14 @@ router.get('/logout', userController.logout)
 
 router.get('/attractions', authenticated, attractionController.getAttractions)
 
+router.post('/favorites/:attractionId', authenticated, userController.addFavorite)
+router.delete('/favorites/:attractionId', authenticated, userController.removeFavorite)
+router.get('/favorites/:userId', authenticated, userController.getFavorites)
+
+router.get('/users/:id', authenticated, userController.getUser)
+router.get('/users/:id/edit', authenticated, userController.editUser)
+router.put('/users/:id', authenticated, userController.putUser)
+
 router.use('/', (req, res) => res.redirect('/attractions'))
 
 router.use('/', generalErrorHandler)
