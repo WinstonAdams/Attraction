@@ -35,6 +35,7 @@ router.get('/users/:id/edit', authenticated, userController.editUser)
 router.put('/users/:id', authenticated, userController.putUser)
 
 router.get('/chat', authenticated, chatController.getChat)
+router.post('/chat', authenticated, chatController.postChat)
 
 router.use('/', (req, res) => res.redirect('/attractions'))
 

@@ -1,12 +1,36 @@
 {{> messages}}
-<div class="chat-title">
-  <h3>詢問旅遊建議</h3>
-</div>
-<div class="row container m-auto d-flex justify-content-center align-items-center" style="width: 35%;">
-  <form action="/chat" method="POST">
-    <textarea class="form-control" type="text" placeholder="請輸入旅遊相關問題"></textarea>
-    <div class="mt-5 d-flex justify-content-center align-items-center">
-      <button class="d-block btn btn-primary btn-block w-25 m-auto" type="submit">詢問</button>
+<div style="margin-bottom: 100px;">
+
+  <div class="chat-title">
+    <h3>詢問旅遊建議</h3>
+  </div>
+  <div class="row container m-auto d-flex justify-content-center align-items-center" style="width: 35%;">
+    <form action="/chat" method="POST">
+      <textarea class="form-control mt-2" type="text" name="question" placeholder="請輸入旅遊相關問題 (ex: 澎湖旅遊三天兩夜的推薦景點)"
+        autofocus required></textarea>
+      <div class="mt-1 d-flex justify-content-center align-items-center">
+        <span style="color: gray; font-size: small;">(詢問後需等待一段時間，才能得到回覆)</span>
+      </div>
+      <div class="my-4 d-flex justify-content-center align-items-center">
+        <button class="d-block btn btn-primary btn-block w-25 m-auto" type="submit">詢問</button>
+      </div>
+    </form>
+  </div>
+
+  {{#if answer}}
+  <div class="row container m-auto d-flex justify-content-center align-items-center" style="width: 60%;">
+    <div class="mt-3 d-flex justify-content-center align-items-center">
+      <h4 style="font-weight: bold;">問題</h4>
     </div>
-  </form>
+    <div class="mt-1 d-flex justify-content-center align-items-center text-break">
+      {{question}}
+    </div>
+    <div class="mt-4 d-flex justify-content-center align-items-center">
+      <h4 style="font-weight: bold;">ChatGPT 回覆</h4>
+    </div>
+    <div class="mt-1 d-flex justify-content-center align-items-center text-break">
+      {{answer}}
+    </div>
+  </div>
+  {{/if}}
 </div>
