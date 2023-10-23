@@ -7,12 +7,12 @@ const configuration = new Configuration({
 })
 const openai = new OpenAIApi(configuration)
 
-const chatController = {
-  getChat: (req, res) => {
-    res.render('chat')
+const askController = {
+  getAsk: (req, res) => {
+    res.render('ask')
   },
 
-  postChat: async (req, res, next) => {
+  postAsk: async (req, res, next) => {
     try {
       const { question } = req.body
       const completion = await openai.chat.completions.create({
@@ -21,11 +21,11 @@ const chatController = {
       })
       const answer = completion.choices[0].message.content
 
-      return res.render('chat', { question, answer })
+      return res.render('ask', { question, answer })
     } catch (err) {
       return next(err)
     }
   }
 }
 
-module.exports = chatController
+module.exports = askController

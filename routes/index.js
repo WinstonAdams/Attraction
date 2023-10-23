@@ -4,7 +4,7 @@ const passport = require('passport')
 
 const userController = require('../controllers/user-controller')
 const attractionController = require('../controllers/attraction-controller')
-const chatController = require('../controllers/chat-controller')
+const askController = require('../controllers/ask-controller')
 const { generalErrorHandler } = require('../middleware/error-handler')
 const { authenticated } = require('../middleware/auth')
 
@@ -34,8 +34,8 @@ router.get('/users/:id', authenticated, userController.getUser)
 router.get('/users/:id/edit', authenticated, userController.editUser)
 router.put('/users/:id', authenticated, userController.putUser)
 
-router.get('/chat', authenticated, chatController.getChat)
-router.post('/chat', authenticated, chatController.postChat)
+router.get('/ask', authenticated, askController.getAsk)
+router.post('/ask', authenticated, askController.postAsk)
 
 router.use('/', (req, res) => res.redirect('/attractions'))
 
