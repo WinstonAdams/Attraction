@@ -30,14 +30,15 @@ const attractionServices = {
           isFavorited: favoritedAttractionId.some(faId => faId === a.id)
         }
       })
+      const displayedPagination = 3
 
       return callback(null, {
         attractions: result,
         keyword,
         city,
         pagination: getPagination(DEFAULT_LIMIT, page, attractions.count),
-        haveEllipsisFront: page > 4,
-        haveEllipsisBack: page < getPagination(DEFAULT_LIMIT, page, attractions.count).pages.length - 3
+        haveEllipsisFront: page > 1 + displayedPagination,
+        haveEllipsisBack: page < getPagination(DEFAULT_LIMIT, page, attractions.count).pages.length - displayedPagination
       })
     } catch (err) {
       return callback(err)
