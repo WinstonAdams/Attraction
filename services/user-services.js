@@ -73,17 +73,6 @@ const userServices = {
     }
   },
 
-  editUser: async (req, callback) => {
-    try {
-      const searchedUser = await User.findByPk(req.params.id, { raw: true })
-      if (!searchedUser) throw new Error('使用者不存在!')
-
-      return callback(null, { searchedUser })
-    } catch (err) {
-      return callback(err)
-    }
-  },
-
   putUser: async (req, callback) => {
     try {
       if (req.user.id !== Number(req.params.id)) throw new Error('只能編輯自己的個人資料！')

@@ -45,7 +45,7 @@ const userController = {
   },
 
   editUser: (req, res, next) => {
-    userServices.editUser(req, (err, data) => err ? next(err) : res.render('users/edit', data))
+    userServices.getUser(req, (err, data) => err ? next(err) : res.render('users/edit', data))
   },
 
   putUser: (req, res, next) => {
