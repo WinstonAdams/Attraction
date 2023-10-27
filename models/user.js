@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       as: 'FavoriteAttractions'
     })
+    User.hasMany(models.Message, { foreignKey: 'userId' })
   }
   return User
 }
