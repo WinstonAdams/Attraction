@@ -9,8 +9,9 @@ const helpController = {
       if (req.user.isAdmin || req.user.id === Number(req.params.userId)) {
         return helpServices.getHelp(req, (err, data) => err ? next(err) : res.render('help', { messages: data }))
       }
-
-      throw new Error('只能進入自己的客服聊天室！')
+      if (req.user.id !== Number(req.params.userId)) {
+        throw new Error('只能進入自己的客服聊天室！')
+      }
     } catch (err) {
       next(err)
     }

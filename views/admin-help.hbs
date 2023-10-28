@@ -1,11 +1,18 @@
 {{> messages}}
-<div class="container mt-3 mb-3">
-  <div class="row">
-    <div class="col-md-10 col-12 mx-auto">
-      <div class="row row-cols-sm-3">
-        {{#each users}}
-        <a class="btn btn-primary" href="/help/{{this.id}}">{{this.name}}</a>
-        {{/each}}
+<div style="margin-bottom: 260px;">
+  <div class="title">
+    <h3>使用者列表</h3>
+  </div>
+  <div class="container mt-3 mb-3">
+    <div class="row">
+      <div class="col-md-10 col-12 mx-auto">
+        <div class="row row-cols-sm-5">
+          {{#each users}}
+          <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 2rem;">
+            <a class="btn btn-primary w-75 mx-2" href="/help/{{this.id}}">{{this.name}}</a>
+          </div>
+          {{/each}}
+        </div>
       </div>
     </div>
   </div>
