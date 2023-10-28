@@ -7,7 +7,7 @@ const helpController = {
         return helpServices.getUsers(req, (err, data) => err ? next(err) : res.render('admin-help', { users: data }))
       }
       if (req.user.isAdmin || req.user.id === Number(req.params.userId)) {
-        return res.render('help')
+        return helpServices.getHelp(req, (err, data) => err ? next(err) : res.render('help', { messages: data }))
       }
 
       throw new Error('只能進入自己的客服聊天室！')
