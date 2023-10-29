@@ -63,10 +63,10 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
   try {
     let user = await User.findByPk(id, {
+      attributes: { exclude: ['password'] },
       include: [{ model: Attraction, as: 'FavoriteAttractions' }]
     })
     user = user.toJSON()
-    delete user.password
     return done(null, user)
   } catch (err) {
     return done(err)

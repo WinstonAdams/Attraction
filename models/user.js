@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    isAdmin: DataTypes.BOOLEAN
   }, {
     underscored: true
   })
@@ -13,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       as: 'FavoriteAttractions'
     })
+    User.hasMany(models.Message, { foreignKey: 'userId' })
   }
   return User
 }

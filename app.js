@@ -4,6 +4,8 @@ const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash')
+const http = require('http')
+const { Server } = require('socket.io')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -16,6 +18,11 @@ const handlebarsHelpers = require('./helpers/handlebars-helpers')
 const app = express()
 const PORT = process.env.PORT || 3000
 const SESSION_SECRET = process.env.SESSION_SECRET
+const server = http.createServer(app)
+const io = new Server(server)
+
+// 將 io(實例) 附加到 app(物件) 上，讓之後的 middleware 都可以使用
+app.io = io
 
 app.engine('hbs', exphbs({
   defaultLayout: 'main',
@@ -25,7 +32,7 @@ app.engine('hbs', exphbs({
 app.set('view engine', 'hbs')
 
 app.use(express.static('public'))
-app.use(express.urlencoded({ extended: true })) // 承接並解析 urlencoded 格式的請求
+app.use(express.urlencoded({ extended: true })) // body-parser，承接並解析 urlencoded 格式的請求
 app.use(methodOverride('_method'))
 app.use(session({ secret: SESSION_SECRET, resave: false, saveUninitialized: false }))
 app.use(passport.initialize())
@@ -42,6 +49,6 @@ app.use((req, res, next) => {
 
 app.use(routes)
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`📢 App is listening on http://localhost:${PORT}`)
 })
