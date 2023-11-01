@@ -7,7 +7,7 @@ const userController = {
 
   signUp: (req, res, next) => {
     userServices.signUp(req, (err, data) => {
-      if (err) next(err)
+      if (err) return next(err)
 
       req.flash('success_messages', '成功註冊帳號！')
       return res.redirect('/signin')
