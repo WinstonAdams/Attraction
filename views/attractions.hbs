@@ -58,11 +58,11 @@
               <div class="card-body p-3">
                 <a href="https://media.taiwan.net.tw/zh-tw/portal/poi/details/{{this.number}}" target="_blank">
                   <h6 class="card-title mb-1">{{ this.name }}</h6>
-
-                  <div class="address mb-1">
-                    <i class="fa-solid fa-location-dot" style="color: rgb(32, 195, 198)"></i> {{ this.address }}
-                  </div>
                 </a>
+
+                <div class="address mb-1">
+                  <i class="fa-solid fa-location-dot" style="color: rgb(32, 195, 198)"></i> {{ this.address }}
+                </div>
 
                 <span class="badge rounded-pill bg-info">
                   {{ this.city }}
@@ -95,29 +95,32 @@
   <ul class="pagination">
     <div class="pagination">
       <li class="page-item {{#ifCond pagination.currentPage 1}}disabled{{/ifCond}}">
-        <a class="page-link" href="/attractions?page={{pagination.prev}}&city={{city}}&keyword={{keyword}}" aria-label="Previous">
+        <a class="page-link" href="/attractions?page={{pagination.prev}}&city={{city}}&keyword={{keyword}}"
+          aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
       {{#if haveEllipsisFront}}
-        <li class="page-item"><a class="page-link">...</a></li>
+      <li class="page-item"><a class="page-link">...</a></li>
       {{/if}}
 
       {{#each pagination.nearPages}}
-        {{#ifCond this ../pagination.currentPage}}
-          <li class="page-item active"><a class="page-link" href="#">{{../this}}</a></li>
-        {{else}}
-          <li class="page-item">
-            <a class="page-link" href="/attractions?page={{../this}}&city={{../../city}}&keyword={{../../keyword}}">{{../this}}</a>
-          </li>
-        {{/ifCond}}
+      {{#ifCond this ../pagination.currentPage}}
+      <li class="page-item active"><a class="page-link" href="#">{{../this}}</a></li>
+      {{else}}
+      <li class="page-item">
+        <a class="page-link"
+          href="/attractions?page={{../this}}&city={{../../city}}&keyword={{../../keyword}}">{{../this}}</a>
+      </li>
+      {{/ifCond}}
       {{/each}}
 
       {{#if haveEllipsisBack}}
-        <li class="page-item"><a class="page-link">...</a></li>
+      <li class="page-item"><a class="page-link">...</a></li>
       {{/if}}
       <li class="page-item {{#ifCond pagination.currentPage pagination.totalPage}}disabled{{/ifCond}}">
-        <a class="page-link" href="/attractions?page={{pagination.next}}&city={{city}}&keyword={{keyword}}" aria-label="Next">
+        <a class="page-link" href="/attractions?page={{pagination.next}}&city={{city}}&keyword={{keyword}}"
+          aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>
@@ -125,12 +128,16 @@
   </ul>
 </nav>
 
-<section class="container mx-auto mt-4">
-  <iframe
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1668243.5038433361!2d120.09143469088768!3d23.557500353095712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346ef3065c07572f%3A0xe711f004bf9c5469!2z5Y-w54Gj!5e0!3m2!1szh-TW!2stw!4v1698573826745!5m2!1szh-TW!2stw"
-    height="550" style="border:0; width: 100%" allowfullscreen="true" loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+<input id="pac-input" class="controls" type="text" placeholder="Search Box" />
+<div id="map" class="container mb-5"></div>
+
+<section class="map-section">
 </section>
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyk7uDghlLSZr7B5Sl6uiz1OIaErf1D1w&callback=initAutocomplete&libraries=places&v=weekly"
+  defer></script>
 
 <script>
   // 輪播首頁圖片
@@ -151,4 +158,68 @@
   citySelect.addEventListener('change', event => {
     filter.submit()
   })
+
+  // Google Map
+  function initAutocomplete() {
+    const map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: 24.13693186208159, lng: 120.68598394897056 },
+      zoom: 13,
+      mapTypeId: "roadmap",
+    })
+    // Create the search box and link it to the UI element.
+    const input = document.getElementById("pac-input")
+    const searchBox = new google.maps.places.SearchBox(input)
+
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input)
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener("bounds_changed", () => {
+      searchBox.setBounds(map.getBounds())
+    });
+
+    let markers = []
+
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener("places_changed", () => {
+      const places = searchBox.getPlaces()
+
+      if (places.length == 0) {
+        return
+      }
+
+      // Clear out the old markers.
+      markers.forEach((marker) => {
+        marker.setMap(null)
+      });
+      markers = []
+
+      // For each place, get the name and location.
+      const bounds = new google.maps.LatLngBounds()
+
+      places.forEach((place) => {
+        if (!place.geometry || !place.geometry.location) {
+          console.log("Returned place contains no geometry")
+          return
+        }
+
+        // Create a marker for each place.
+        markers.push(
+          new google.maps.Marker({
+            map,
+            title: place.name,
+            position: place.geometry.location,
+          }),
+        )
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport)
+        } else {
+          bounds.extend(place.geometry.location)
+        }
+      })
+      map.fitBounds(bounds)
+    })
+  }
+
+  window.initAutocomplete = initAutocomplete
 </script>
