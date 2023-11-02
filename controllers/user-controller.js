@@ -7,7 +7,7 @@ const userController = {
 
   signUp: (req, res, next) => {
     userServices.signUp(req, (err, data) => {
-      if (err) next(err)
+      if (err) return next(err)
 
       req.flash('success_messages', '成功註冊帳號！')
       return res.redirect('/signin')
@@ -41,16 +41,16 @@ const userController = {
   },
 
   getUser: (req, res, next) => {
-    userServices.getUser(req, (err, data) => err ? next(err) : res.render('users/profile', data))
+    userServices.getUser(req, (err, data) => err ? next(err) : res.render('users/profile', { user: data }))
   },
 
   editUser: (req, res, next) => {
-    userServices.getUser(req, (err, data) => err ? next(err) : res.render('users/edit', data))
+    userServices.getUser(req, (err, data) => err ? next(err) : res.render('users/edit', { user: data }))
   },
 
   putUser: (req, res, next) => {
     userServices.putUser(req, (err, data) => {
-      if (err) next(err)
+      if (err) return next(err)
       req.flash('success_messages', '個人資料編輯成功!')
       res.redirect(`/users/${data.id}`)
     })

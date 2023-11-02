@@ -64,10 +64,11 @@ const userServices = {
 
   getUser: async (req, callback) => {
     try {
-      const searchedUser = await User.findByPk(req.params.id, { raw: true })
-      if (!searchedUser) throw new Error('使用者不存在!')
+      if (req.user.id !== Number(req.params.id)) throw new Error('只能查看自己的個人資料！')
+      const user = await User.findByPk(req.params.id, { raw: true })
+      if (!user) throw new Error('使用者不存在!')
 
-      return callback(null, { searchedUser })
+      return callback(null, user)
     } catch (err) {
       return callback(err)
     }
@@ -89,7 +90,7 @@ const userServices = {
         password: await bcrypt.hash(password, 10)
       })
       delete updateUser.password
-      return callback(null, updateUser)
+      return callback(null, updateUser.toJSON())
     } catch (err) {
       return callback(err)
     }
