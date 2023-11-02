@@ -1,4 +1,4 @@
-<section class="background-img">
+<section class="background-img" style="margin-top: 70px;">
   <div class="filter"></div>
   <h3>發掘美景，尋找秘境<br>瀏覽台灣各地景點加入願望清單</h3>
   <form action="/attractions" class="select">
@@ -161,39 +161,40 @@
 
   // Google Map
   function initAutocomplete() {
+    // 建立一個 google map
     const map = new google.maps.Map(document.getElementById("map"), {
       center: { lat: 24.13693186208159, lng: 120.68598394897056 },
       zoom: 13,
       mapTypeId: "roadmap",
     })
-    // Create the search box and link it to the UI element.
+    // 建立一個 google map 地點搜尋框，擺放在 map 的左上角
     const input = document.getElementById("pac-input")
     const searchBox = new google.maps.places.SearchBox(input)
-
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input)
-    // Bias the SearchBox results towards current map's viewport.
+
+    // map 可視範圍改變時，調整搜尋結果
     map.addListener("bounds_changed", () => {
       searchBox.setBounds(map.getBounds())
     });
 
     let markers = []
 
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
+    // 當使用者選擇一個地點時觸發
     searchBox.addListener("places_changed", () => {
+      // 取得搜尋框回傳的地點列表
       const places = searchBox.getPlaces()
 
       if (places.length == 0) {
         return
       }
 
-      // Clear out the old markers.
+      // 清除之前的地點標記
       markers.forEach((marker) => {
         marker.setMap(null)
       });
       markers = []
 
-      // For each place, get the name and location.
+      // 用於計算最終顯示的可視範圍
       const bounds = new google.maps.LatLngBounds()
 
       places.forEach((place) => {
@@ -202,7 +203,7 @@
           return
         }
 
-        // Create a marker for each place.
+        // 將每一個地點標記加到 map 上
         markers.push(
           new google.maps.Marker({
             map,
@@ -210,16 +211,19 @@
             position: place.geometry.location,
           }),
         )
+
+        // 若有可視範圍訊息，給 bounds 使用；若沒有，將地點給 bounds 使用
         if (place.geometry.viewport) {
-          // Only geocodes have viewport.
           bounds.union(place.geometry.viewport)
         } else {
           bounds.extend(place.geometry.location)
         }
       })
+      // map 的可視範圍調整為計算後的
       map.fitBounds(bounds)
     })
   }
 
+  // 將 initAutocomplete 設置為全域函式
   window.initAutocomplete = initAutocomplete
 </script>
