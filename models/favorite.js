@@ -4,6 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     attractionId: DataTypes.INTEGER
   }, {
+    sequelize,
+    modelName: 'Favorite',
+    tableName: 'Favorites',
     underscored: true
   })
   Favorite.associate = function (models) {

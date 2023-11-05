@@ -5,6 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.STRING,
     userId: DataTypes.INTEGER
   }, {
+    sequelize,
+    modelName: 'Message',
+    tableName: 'Messages',
     underscored: true
   })
   Message.associate = function (models) {
