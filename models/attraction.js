@@ -7,6 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     image: DataTypes.STRING
   }, {
+    sequelize,
+    modelName: 'Attraction',
+    tableName: 'Attractions',
     underscored: true
   })
   Attraction.associate = function (models) {
