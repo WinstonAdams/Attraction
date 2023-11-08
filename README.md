@@ -1,10 +1,10 @@
 # 台灣旅遊平台
 
+![Index page about Attraction](https://github.com/WinstonAdams/Attraction/blob/2dbf6cee4f592aa1baff18d493367f77b42bd85b/public/images/attraction%20%E9%A6%96%E9%A0%81.jpg)
+
 ## 介紹
 
 收藏屬於自己的台灣景點清單，可以瀏覽景點、查看詳細資訊、搜尋景點，利用 Google Map 查看景點街景或周圍的特色地點，需要旅遊建議時也可以直接向 ChatGPT 詢問，若遇到網站上的問題時，能夠向客服人員即時連線對話。
-
-![Index page about Attraction](./public/images/attraction首頁.jpg)
 
 ## 功能
 
