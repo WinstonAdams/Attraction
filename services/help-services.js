@@ -21,11 +21,12 @@ const helpServices = {
 
       // 一次性的監聽 connection 事件
       io.once('connection', socket => {
+        const options = { month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'Asia/Taipei' }
         // 給一個特定的 room channel
         socket.join(roomId)
         // 斷線時
         socket.on('disconnect', () => {
-          io.to(roomId).emit('message', { name: req.user.name, content: '(已離線)', createdAt: new Date().toLocaleString() })
+          io.to(roomId).emit('message', { name: req.user.name, content: '(已離線)', createdAt: new Date().toLocaleString('en-US', options) })
         })
         // 收到前端使用者輸入的 content 時
         socket.on('content', async (content) => {
@@ -36,7 +37,7 @@ const helpServices = {
             userId: req.user.id
           })
           newMsg = newMsg.toJSON()
-          newMsg.createdAt = newMsg.createdAt.toLocaleString()
+          newMsg.createdAt = newMsg.createdAt.toLocaleString('en-US', options)
           newMsg.name = req.user.name
           // 將 message 傳給前端，即時顯示 message
           io.to(roomId).emit('message', newMsg)
