@@ -17,11 +17,11 @@ const helpServices = {
   getHelp: async (req, callback) => {
     try {
       const io = req.app.io
+      const options = { month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'Asia/Taipei' }
       const roomId = `${req.params.userId}-admin`
 
       // 一次性的監聽 connection 事件
       io.once('connection', socket => {
-        const options = { month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'Asia/Taipei' }
         // 給一個特定的 room channel
         socket.join(roomId)
         // 斷線時
@@ -54,7 +54,7 @@ const helpServices = {
       messages = messages.map(msg => {
         return {
           ...msg,
-          createdAt: new Date(msg.createdAt).toLocaleString()
+          createdAt: msg.createdAt.toLocaleString('en-US', options)
         }
       })
       return callback(null, messages)
